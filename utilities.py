@@ -29,3 +29,12 @@ def Habilidades(pokemon):
     print("")
     input("Pulse cualquier tecla para continuar")
     
+def Movimientos (pokemon):
+     print("")
+     print("ADVERTENCIA")
+     print("La mayoria de pokemon aprenden una gran cantidad de movmientos")
+     numMov = int(input("Por favor elija la cantidad de movmientos que desee ver: "))
+     movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:numMov]]
+     print(f"{','.join(movimientos).capitalize()}")
+     print("")
+     input("Pulse cualquier tecla para continuar")

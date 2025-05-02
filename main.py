@@ -41,41 +41,20 @@ while(close != True):
             opc = input("Ingrese el numero de la opcion que desee consultar: ")
 
             if(opc == "1"):
+               print("")
                Estadisticas(pokeData)
                limpiarConsola()
               
 
             elif(opc == "2"):
+               print()
                Habilidades(pokeData)
                limpiarConsola()
 
             elif(opc == "3"):
-               pass
+               Movimientos(pokeData)
                limpiarConsola()
 
-            elif(opc == "4"):
-               pass
-               limpiarConsola()
-
-            elif(opc == "5"):
-               pass
-               limpiarConsola()
-
-            elif(opc == "6"):
-               pass
-               limpiarConsola()
-
-            elif(opc == "7"):
-               pass
-               limpiarConsola()
-
-            elif(opc == "8"):
-               pass
-               limpiarConsola()
-
-            elif(opc == "9"):
-               pass
-               limpiarConsola()
 
             elif(opc == "10"):
                break
