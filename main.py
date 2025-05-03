@@ -15,13 +15,17 @@ while(close != True):
     
     else:
       pokeData = respuesta.json()
+
+      
+      
+      
       while(close != True):
             limpiarConsola()
             print(f"Pokedex de {pokeSelect}\n")
             print("1. Estadisticas base")
             print("2. Habilidades")
             print("3. Moviminetos")
-            #print("4. ")
+            print("4. Guardar pokemon en txt")
 
             
 
@@ -43,18 +47,28 @@ while(close != True):
             if(opc == "1"):
                print("")
                Estadisticas(pokeData)
+               print("")
+               input("Pulse cualquier tecla para continuar")
                limpiarConsola()
               
 
             elif(opc == "2"):
                print()
                Habilidades(pokeData)
+               print("")
+               input("Pulse cualquier tecla para continuar")
                limpiarConsola()
 
             elif(opc == "3"):
                Movimientos(pokeData)
+               print("")
+               input("Pulse cualquier tecla para continuar")
                limpiarConsola()
 
+            elif(opc == "4"):
+               guardarPokemon(pokeSelect.lower(),pokeData)
+               input("Pulse cualquier tecla para continuar")
+               limpiarConsola()
 
             elif(opc == "10"):
                break
