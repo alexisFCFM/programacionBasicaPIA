@@ -15,32 +15,17 @@ while(close != True):
     
     else:
       pokeData = respuesta.json()
+      guardarPokemon(pokeSelect.lower(),pokeData)
 
-      
-      
-      
       while(close != True):
             limpiarConsola()
             print(f"Pokedex de {pokeSelect}\n")
             print("1. Estadisticas base")
             print("2. Habilidades")
             print("3. Moviminetos")
-            print("4. Guardar pokemon en txt")
-
-            
-
-            """print("1. Moves")
-            print("2. Abilities")
-            print("3. Pokémon (including various forms)")
-            print("4. Types")
-            print("5. Egg Groups")
-            print("6. Game Versions")
-            print("7. Items")
-            print("8. Pokédexes")
-            print("9. Pokémon Evolution Chains")"""
-            
-            print("10. Cambiar pokemon seleccionado" )
-            print("11. Salir")
+            print("4. Guardar pokemon ya buscadoes en txt")       
+            print("5. Cambiar pokemon seleccionado" )
+            print("6. Salir")
 
             opc = input("Ingrese el numero de la opcion que desee consultar: ")
 
@@ -66,14 +51,20 @@ while(close != True):
                limpiarConsola()
 
             elif(opc == "4"):
-               guardarPokemon(pokeSelect.lower(),pokeData)
+               nombreUsuario = input("Seleccione un nombre para su archivo txt: ")
+               
+               with open(nombreUsuario +'.txt', 'w', encoding='utf-8') as archivo:
+                  json.dump(pokemonDicc, archivo, ensure_ascii=False, indent=4)
+              
+               print("Archivo exportado")
                input("Pulse cualquier tecla para continuar")
                limpiarConsola()
 
-            elif(opc == "10"):
+            elif(opc == "5"):
+               limpiarConsola()
                break
             
-            elif(opc == "11"):
+            elif(opc == "6"):
                close = True
                
 

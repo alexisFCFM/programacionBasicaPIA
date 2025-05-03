@@ -14,6 +14,9 @@ pokemonHabilidades = []
 pokemonMovimientosDicc = {}
 pokemonMovimientos = [] 
 
+pokemonStatsDicc = {}
+pokemonStats = {}
+
 def limpiarConsola():
     if os.name == "nt":
         os.system("cls")
@@ -52,15 +55,19 @@ def guardarPokemon(pokemonSave,pokemon):
      for ability in pokemon["abilities"]:
         pokemonHabilidades.append(ability["ability"]["name"])
 
-     for movimiento in pokemon['moves'][:5]:
+     for movimiento in pokemon['moves']:
         pokemonMovimientos.append(movimiento['move']['name'])
    
+     for stat in pokemon['stats']:
+        nombre_stat = stat['stat']['name']
+        valor_stat = stat['base_stat']
+        pokemonStats[nombre_stat.capitalize()] = valor_stat
 
      pokemonHabilidadesDicc["Habilidades"] = pokemonHabilidades
      pokemonMovimientosDicc["Movimientos"] = pokemonMovimientos
+     pokemonStatsDicc["Estadisticas"] = pokemonStats
 
-     pokemonDicc[pokemonSave] = pokemonHabilidadesDicc, pokemonMovimientosDicc  
+     pokemonDicc[pokemonSave] = pokemonHabilidadesDicc, pokemonMovimientosDicc, pokemonStatsDicc
 
      
-     print(pokemonDicc)
-     input()
+   
