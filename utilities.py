@@ -8,15 +8,6 @@ apiUrl = "https://pokeapi.co/api/v2/pokemon/"
 pokemonDicc = {}
 
 
-pokemonHabilidadesDicc = {}
-pokemonHabilidades = []
-
-pokemonMovimientosDicc = {}
-pokemonMovimientos = [] 
-
-pokemonStatsDicc = {}
-pokemonStats = {}
-
 def limpiarConsola():
     if os.name == "nt":
         os.system("cls")
@@ -51,23 +42,17 @@ def Movimientos (pokemon):
           print("")
           input("Ingrese un valor valido")
 
-def guardarPokemon(pokemonSave,pokemon):
-     for ability in pokemon["abilities"]:
-        pokemonHabilidades.append(ability["ability"]["name"])
-
-     for movimiento in pokemon['moves']:
-        pokemonMovimientos.append(movimiento['move']['name'])
-   
-     for stat in pokemon['stats']:
-        nombre_stat = stat['stat']['name']
-        valor_stat = stat['base_stat']
-        pokemonStats[nombre_stat.capitalize()] = valor_stat
-
-     pokemonHabilidadesDicc["Habilidades"] = pokemonHabilidades
-     pokemonMovimientosDicc["Movimientos"] = pokemonMovimientos
-     pokemonStatsDicc["Estadisticas"] = pokemonStats
-
-     pokemonDicc[pokemonSave] = pokemonHabilidadesDicc, pokemonMovimientosDicc, pokemonStatsDicc
 
      
-   
+def guardarPokemon(pokeName, pokemon):
+    # Crear nuevas listas y diccionarios dentro de la función
+    habilidades = [ability["ability"]["name"] for ability in pokemon["abilities"]]
+    movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:4]]
+    stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokemon['stats']}
+
+    pokemonDicc[pokeName] = {
+        "Habilidades": habilidades,
+        "Movimientos": movimientos,
+        "Estadisticas": stats
+    }
+
