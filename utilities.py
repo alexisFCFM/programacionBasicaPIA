@@ -23,8 +23,14 @@ def Estadisticas(pokemon):
        
 
 def Habilidades(pokemon):
-    for ability in pokemon["abilities"]:
-                print(ability["ability"]["name"])
+    ImpMov = [ability["ability"]["name"] for ability in pokemon["abilities"]]
+    return ImpMov            
+                #print(ability["ability"]["name"])
+
+def Tipos(pokemon):
+    ImpType = [types["type"]["name"] for types in pokemon["types"]]
+    return ImpType
+
     
     
 def Movimientos (pokemon):
@@ -45,7 +51,7 @@ def Movimientos (pokemon):
 
      
 def guardarPokemon(pokeName, pokemon):
-    # Crear nuevas listas y diccionarios dentro de la función
+   
     habilidades = [ability["ability"]["name"] for ability in pokemon["abilities"]]
     movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:4]]
     stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokemon['stats']}

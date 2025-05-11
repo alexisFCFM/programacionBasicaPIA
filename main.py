@@ -20,12 +20,19 @@ while(close != True):
       while(close != True):
             limpiarConsola()
             print(f"Pokedex de {pokeSelect}\n")
-            print("1. Estadisticas base")
-            print("2. Habilidades")
-            print("3. Moviminetos")
-            print("4. Guardar pokemon ya buscadoes en txt")       
-            print("5. Cambiar pokemon seleccionado" )
-            print("6. Salir")
+
+            print(f"Numero de pokedex: {pokeJson['id']}")
+            print(f"Tipo(s): {Tipos(pokeJson)}")
+            print(f"Habilidades: {Habilidades(pokeJson)}")
+            print(f"Altura: {pokeJson['height']}m")
+            print(f"Peso: {pokeJson['weight']}kg")
+
+            print("\nMas opciones:")
+            print("1. Mostrar estadisticas")
+            print("2. Mostrar moviminetos")
+            print("3. Guardar pokemon ya buscadoes en txt")       
+            print("4. Cambiar pokemon seleccionado" )
+            print("5. Salir")
 
             opc = input("Ingrese el numero de la opcion que desee consultar: ")
 
@@ -35,22 +42,14 @@ while(close != True):
                print("")
                input("Pulse cualquier tecla para continuar")
                limpiarConsola()
-              
 
             elif(opc == "2"):
-               print()
-               Habilidades(pokeJson)
-               print("")
-               input("Pulse cualquier tecla para continuar")
-               limpiarConsola()
-
-            elif(opc == "3"):
                Movimientos(pokeJson)
                print("")
                input("Pulse cualquier tecla para continuar")
                limpiarConsola()
 
-            elif(opc == "4"):
+            elif(opc == "3"):
                nombreUsuario = input("Seleccione un nombre para su archivo txt: ")
                
                with open(nombreUsuario +'.txt', 'w', encoding='utf-8') as archivo:
@@ -60,11 +59,11 @@ while(close != True):
                input("Pulse cualquier tecla para continuar")
                limpiarConsola()
 
-            elif(opc == "5"):
+            elif(opc == "4"):
                limpiarConsola()
                break
             
-            elif(opc == "6"):
+            elif(opc == "5"):
                close = True
                
 
