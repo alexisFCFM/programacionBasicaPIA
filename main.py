@@ -15,7 +15,7 @@ while(close != True):
     
     else:
       pokeJson = respuesta.json()
-      guardarPokemon(pokeSelect.lower(),pokeJson)
+      descargarPokemon(pokeSelect.lower(),pokeJson)
 
       while(close != True):
             limpiarConsola()

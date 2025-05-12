@@ -14,22 +14,18 @@ def limpiarConsola():
     else:
         os.system("clear")
 
-
 def Estadisticas(pokemon):
-    for stat in pokemon['stats']:
-        nombre_stat = stat['stat']['name']
-        valor_stat = stat['base_stat']
-        print(f"{nombre_stat.capitalize()}:{valor_stat}")
-       
+    returnStats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokemon['stats']}
+    return returnStats
+          
 
 def Habilidades(pokemon):
-    ImpMov = [ability["ability"]["name"] for ability in pokemon["abilities"]]
-    return ImpMov            
-                #print(ability["ability"]["name"])
+    returnMov = [ability["ability"]["name"] for ability in pokemon["abilities"]]
+    return returnMov            
 
 def Tipos(pokemon):
-    ImpType = [types["type"]["name"] for types in pokemon["types"]]
-    return ImpType
+    returnType = [types["type"]["name"] for types in pokemon["types"]]
+    return returnType
 
     
     
@@ -43,22 +39,33 @@ def Movimientos (pokemon):
         movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:numMov]]
         print(f"{','.join(movimientos).capitalize()}")
         
-
      except:
           print("")
           input("Ingrese un valor valido")
-
-
      
-def guardarPokemon(pokeName, pokemon):
-   
-    habilidades = [ability["ability"]["name"] for ability in pokemon["abilities"]]
-    movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:4]]
-    stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokemon['stats']}
+def descargarPokemon(pokeName, pokeJson):
+    numeroPokedex = pokeJson['id']
+    tipos = Tipos(pokeJson)
+    habilidades = Habilidades(pokeJson)
+    altura = pokeJson['height']
+    peso = pokeJson['weight']
+    stats = Estadisticas(pokeJson)
+    movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves']]
+    
 
     pokemonDicc[pokeName] = {
-        "Habilidades": habilidades,
-        "Movimientos": movimientos,
-        "Estadisticas": stats
+        "id" : numeroPokedex,
+        "tipo" : tipos,
+        "habilidades": habilidades,
+        "altura" : altura,
+        "peso" :peso,
+        "estadisticas": stats,
+        "movimientos": movimientos
     }
+
+    with open("diccionarioLocal" +'.json', 'w', encoding='utf-8') as archivo:
+        json.dump(pokemonDicc, archivo, ensure_ascii=False, indent=4)
+
+
+
 
