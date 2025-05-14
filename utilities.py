@@ -44,6 +44,7 @@ def Movimientos (pokemon):
           input("Ingrese un valor valido")
      
 def descargarPokemon(pokeName, pokeJson):
+    nombrePokemon = pokeJson['name']
     numeroPokedex = pokeJson['id']
     tipos = Tipos(pokeJson)
     habilidades = Habilidades(pokeJson)
@@ -54,8 +55,9 @@ def descargarPokemon(pokeName, pokeJson):
     
 
     pokemonDicc[pokeName] = {
+        "nombre" : nombrePokemon, 
         "id" : numeroPokedex,
-        "tipo" : tipos,
+        "tipos" : tipos,
         "habilidades": habilidades,
         "altura" : altura,
         "peso" :peso,

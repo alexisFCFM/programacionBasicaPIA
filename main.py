@@ -21,6 +21,7 @@ while(close != True):
             limpiarConsola()
             print(f"Pokedex de {pokeSelect}\n")
 
+            print(f"Nombre de pokemon: {pokeJson['name']}")
             print(f"Numero de pokedex: {pokeJson['id']}")
             print(f"Tipo(s): {Tipos(pokeJson)}")
             print(f"Habilidades: {Habilidades(pokeJson)}")
