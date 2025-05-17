@@ -30,19 +30,11 @@ def Tipos(pokemon):
     
     
 def Movimientos (pokemon):
-     print("")
-     print("ADVERTENCIA")
-     print("La mayoria de pokemon aprenden una gran cantidad de movmientos")
-     try:
-
-        numMov = int(input("Por favor elija la cantidad de movmientos que desee ver: "))
-        movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:numMov]]
-        print(f"{','.join(movimientos).capitalize()}")
+    movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:4]]
+    print(f"{','.join(movimientos).capitalize()}")
         
-     except:
-          print("")
-          input("Ingrese un valor valido")
-     
+        
+    
 def descargarPokemon(pokeName, pokeJson):
     nombrePokemon = pokeJson['name']
     numeroPokedex = pokeJson['id']
@@ -51,7 +43,7 @@ def descargarPokemon(pokeName, pokeJson):
     altura = pokeJson['height']
     peso = pokeJson['weight']
     stats = Estadisticas(pokeJson)
-    movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves']]
+    movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves'][:4]]
     
 
     pokemonDicc[pokeName] = {
@@ -64,9 +56,36 @@ def descargarPokemon(pokeName, pokeJson):
         "estadisticas": stats,
         "movimientos": movimientos
     }
-
-    with open("diccionarioLocal" +'.json', 'w', encoding='utf-8') as archivo:
+   
+    with open("diccionarioLocal.json", 'w', encoding='utf-8') as archivo:
         json.dump(pokemonDicc, archivo, ensure_ascii=False, indent=4)
+
+
+def cargarPokemon():
+    with open("diccionarioLocal.json", 'r') as diccLocal:
+        tempDicc = json.load(diccLocal)
+    
+    for nombre in tempDicc.keys():
+        nombrePokemon = tempDicc[nombre]['nombre']
+        numeroPokedex = tempDicc[nombre]['id']
+        tipos = tempDicc[nombre]['tipos']
+        habilidades = tempDicc[nombre]['habilidades']
+        altura = tempDicc[nombre]['altura']
+        peso = tempDicc[nombre]['peso']
+        stats = tempDicc[nombre]['estadisticas']
+        movimientos = tempDicc[nombre]['movimientos']
+    
+
+        pokemonDicc[nombre] = {
+            "nombre" : nombrePokemon, 
+            "id" : numeroPokedex,
+            "tipos" : tipos,
+            "habilidades": habilidades,
+            "altura" : altura,
+            "peso" :peso,
+            "estadisticas": stats,
+            "movimientos": movimientos
+        }
 
 
 

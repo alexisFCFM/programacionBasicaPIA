@@ -2,6 +2,26 @@ from utilities import *
 
 close = False
 
+
+
+cargarPokemon()
+   #print("Algo")
+   #tempNombre = nombre
+
+   #print(tempDicc[nombre]['nombre'])
+   #input()
+
+   #descargarPokemon(tempDicc[nombre]['nombre'].lower(),tempDicc)
+
+   #nombrePokemon = [nombre]['nombre']
+   #numeroPokedex = nombre['id']
+   #tipos = tempNombre['tipos']#Tipos(pokeJson)
+   #habilidades = tempNombre['habilidades']#Habilidades(pokeJson)
+   #altura = tempNombre['altura']
+   #peso = tempNombre['peso']
+   #stats = tempNombre['stats']#Estadisticas(pokeJson)
+   #movimientos = tempNombre['movimientos']#[movimiento['move']['name'] for movimiento in pokeJson['moves']]
+    
 while(close != True):
     print("PokeApi")
     pokeSelect = input("Ingrese el pokemon que desea consultar: ")
