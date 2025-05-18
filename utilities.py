@@ -17,25 +17,26 @@ def limpiarConsola():
         os.system("clear")
 
 
-
 def Estadisticas(pokemon):
-    returnStats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokemon['stats']}
-    return returnStats
+    print(f"Puntos de vida: {pokemonDicc[pokemon]['estadisticas']['Hp']}")
+    print(f"Puntos de ataque: {pokemonDicc[pokemon]['estadisticas']['Attack']}")
+    print(f"Puntos de defensa: {pokemonDicc[pokemon]['estadisticas']['Defense']}")
+    print(f"Puntos de ataque especial: {pokemonDicc[pokemon]['estadisticas']['Special-attack']}")
+    print(f"Puntos de defensa especial: {pokemonDicc[pokemon]['estadisticas']['Special-defense']}")
+    print(f"Puntos de velocidad: {pokemonDicc[pokemon]['estadisticas']['Speed']}")
           
-def Habilidades(pokemon):
-    returnMov = [ability["ability"]["name"] for ability in pokemon["abilities"]]
-    return returnMov            
-
-def Tipos(pokemon):
-    returnType = [types["type"]["name"] for types in pokemon["types"]]
-    return returnType
-
 def Movimientos (pokemon):
-    movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:4]]
-    print(f"{','.join(movimientos).capitalize()}")
-        
-        
-    
+    verificacionNumero = r'^(?!(0+(\.0+)?$))\d+(\.\d+)?$'
+  
+    movMax = input("Ingrese la catidad maxima de movimientos que desea ver: ")
+    print()
+    if (re.fullmatch(verificacionNumero, movMax)):
+        for movimiento in pokemonDicc[pokemon]["movimientos"][:int(movMax)]:
+            print(movimiento)
+
+    else:
+        print("Ingrese un valor valido...")
+         
 def descargarPokemon(pokeName, pokeJson):
    
     if(re.fullmatch(verificacionNombre, pokeJson['name'])):
@@ -67,7 +68,6 @@ def descargarPokemon(pokeName, pokeJson):
     else:
         print("Datos corruptos. Cancelando registro")
         input("Precione cualquier tecla para continuar...")
-
 
 def cargarPokemon():
     with open("diccionarioLocal.json", 'r') as diccLocal:

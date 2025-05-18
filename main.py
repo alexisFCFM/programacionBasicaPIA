@@ -32,7 +32,7 @@ while(close != True):
 
                print("\nMas opciones:")
                print("1. Mostrar estadisticas")
-               print("2. Mostrar moviminetos")
+               print("2. Mostrar movimientos")
                print("3. Guardar pokemon ya buscadoes en txt")       
                print("4. Cambiar pokemon seleccionado" )
                print("5. Salir")
@@ -41,14 +41,14 @@ while(close != True):
 
                if(opc == "1"):
                   print("")
-               #Estadisticas(pokeJson)
-               #print(pokemonDicc[pokeSelect]['estadisticas'])
+                  Estadisticas(pokeSelect)
                   print("")
                   input("Pulse cualquier tecla para continuar")
                   limpiarConsola()
 
                elif(opc == "2"):
-                  Movimientos(pokeJson)
+                  print("")
+                  Movimientos(pokeSelect)
                   print("")
                   input("Pulse cualquier tecla para continuar")
                   limpiarConsola()
