@@ -36,11 +36,13 @@ while(close != True):
                print(f"3. Sacar promedio de las estadisticas de {pokeSelect}")
                print(f"4. Sacar mediana de las estadisticas de {pokeSelect}")
                print(f"5. Sacar moda de las estadisticas de {pokeSelect}")
+               print(f"6. Sacar la desviación estándar de las estadisticas de {pokeSelect}")
+
 
 
                print("")
-               print("10. Cambiar pokemon seleccionado" )
-               print("11. Salir")
+               print("7. Cambiar pokemon seleccionado" )
+               print("8. Salir")
 
                opc = input("Ingrese el numero de la opcion que desee consultar: ")
 
@@ -79,13 +81,20 @@ while(close != True):
                    input("Pulse cualquier tecla para continuar")
                    limpiarConsola()
 
+               elif(opc == "6"):
+                   print("")
+                   print(f"La desviación estándar de las estadisticas de {pokeSelect} es {sacarDerivacionEstandar(pokeSelect)}")  
+                   print("")
+                   input("Pulse cualquier tecla para continuar")
+                   limpiarConsola()
 
 
-               elif(opc == "10"):
+
+               elif(opc == "7"):
                   limpiarConsola()
                   break
             
-               elif(opc == "11"):
+               elif(opc == "8"):
                   close = True
                
 

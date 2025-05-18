@@ -4,6 +4,7 @@ import json
 import re
 import numpy
 import statistics
+import matplotlib
 
 apiUrl = "https://pokeapi.co/api/v2/pokemon/"
 verificacionNombre = r'^[A-Za-z]+$'
@@ -79,9 +80,17 @@ def sacarMediana(pokemon):
     return numpy.median(tempListaStats)
 
 
+def sacarDerivacionEstandar(pokemon):
+    tempHp = int(pokemonDicc[pokemon]['estadisticas']['Hp'])
+    tempAttack = int(pokemonDicc[pokemon]['estadisticas']['Attack'])
+    tempDefense = int(pokemonDicc[pokemon]['estadisticas']['Defense'])
+    tempSpecialAtt = int(pokemonDicc[pokemon]['estadisticas']['Special-attack'])
+    tempSpecialDef = int(pokemonDicc[pokemon]['estadisticas']['Special-defense'])
+    tempSpeed = int(pokemonDicc[pokemon]['estadisticas']['Speed'])
     
+    tempListaStats = [tempHp, tempAttack, tempDefense, tempSpecialAtt, tempSpecialDef, tempSpeed]
 
-
+    return statistics.stdev(tempListaStats)
 
 
 def descargarPokemon(pokeName, pokeJson):
