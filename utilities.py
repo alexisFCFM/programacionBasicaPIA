@@ -4,7 +4,7 @@ import json
 import re
 
 apiUrl = "https://pokeapi.co/api/v2/pokemon/"
-#verificacionNombre = r'^[A-Za-zÁÉÍÓÚáéíóúÑñ]+$'
+verificacionNombre = r'^[A-Za-z]+$'
 
 
 pokemonDicc = {}
@@ -15,6 +15,7 @@ def limpiarConsola():
         os.system("cls")
     else:
         os.system("clear")
+
 
 
 def Estadisticas(pokemon):
@@ -37,35 +38,43 @@ def Movimientos (pokemon):
     
 def descargarPokemon(pokeName, pokeJson):
    
-    nombrePokemon = pokeJson['name']
-    numeroPokedex = pokeJson['id']
-    tipos = [types["type"]["name"] for types in pokeJson["types"]] #Tipos(pokeJson)
-    habilidades = [ability["ability"]["name"] for ability in pokeJson["abilities"]] #Habilidades(pokeJson)
-    altura = pokeJson['height']
-    peso = pokeJson['weight']
-    stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokeJson['stats']} #Estadisticas(pokeJson)
-    movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves']]
+    if(re.fullmatch(verificacionNombre, pokeJson['name'])):
+
+        nombrePokemon = pokeJson['name']
+        numeroPokedex = pokeJson['id']
+        tipos = [types["type"]["name"] for types in pokeJson["types"]] #Tipos(pokeJson)
+        habilidades = [ability["ability"]["name"] for ability in pokeJson["abilities"]] #Habilidades(pokeJson)
+        altura = pokeJson['height']
+        peso = pokeJson['weight']
+        stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokeJson['stats']} #Estadisticas(pokeJson)
+        movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves']]
     
 
-    pokemonDicc[pokeName] = {
-        "nombre" : nombrePokemon, 
-        "id" : numeroPokedex,
-        "tipos" : tipos,
-        "habilidades": habilidades,
-        "altura" : altura,
-        "peso" :peso,
-        "estadisticas": stats,
-        "movimientos": movimientos
-    }
+        pokemonDicc[pokeName] = {
+            "nombre" : nombrePokemon, 
+            "id" : numeroPokedex,
+            "tipos" : tipos,
+            "habilidades": habilidades,
+            "altura" : altura,
+            "peso" :peso,
+            "estadisticas": stats,
+            "movimientos": movimientos
+        }
    
-    with open("diccionarioLocal.json", 'w', encoding='utf-8') as archivo:
-        json.dump(pokemonDicc, archivo, ensure_ascii=False, indent=4)
+        with open("diccionarioLocal.json", 'w', encoding='utf-8') as archivo:
+            json.dump(pokemonDicc, archivo, ensure_ascii=False, indent=4)
+
+    else:
+        print("Datos corruptos. Cancelando registro")
+        input("Precione cualquier tecla para continuar...")
 
 
 def cargarPokemon():
     with open("diccionarioLocal.json", 'r') as diccLocal:
         tempDicc = json.load(diccLocal)
     
+    
+
     for nombre in tempDicc.keys():
         nombrePokemon = tempDicc[nombre]['nombre']
         numeroPokedex = tempDicc[nombre]['id']
