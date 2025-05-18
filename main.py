@@ -2,25 +2,7 @@ from utilities import *
 
 close = False
 
-
-
 cargarPokemon()
-   #print("Algo")
-   #tempNombre = nombre
-
-   #print(tempDicc[nombre]['nombre'])
-   #input()
-
-   #descargarPokemon(tempDicc[nombre]['nombre'].lower(),tempDicc)
-
-   #nombrePokemon = [nombre]['nombre']
-   #numeroPokedex = nombre['id']
-   #tipos = tempNombre['tipos']#Tipos(pokeJson)
-   #habilidades = tempNombre['habilidades']#Habilidades(pokeJson)
-   #altura = tempNombre['altura']
-   #peso = tempNombre['peso']
-   #stats = tempNombre['stats']#Estadisticas(pokeJson)
-   #movimientos = tempNombre['movimientos']#[movimiento['move']['name'] for movimiento in pokeJson['moves']]
     
 while(close != True):
     print("PokeApi")
@@ -41,12 +23,12 @@ while(close != True):
             limpiarConsola()
             print(f"Pokedex de {pokeSelect}\n")
 
-            print(f"Nombre de pokemon: {pokeJson['name']}")
-            print(f"Numero de pokedex: {pokeJson['id']}")
-            print(f"Tipo(s): {Tipos(pokeJson)}")
-            print(f"Habilidades: {Habilidades(pokeJson)}")
-            print(f"Altura: {pokeJson['height']}m")
-            print(f"Peso: {pokeJson['weight']}kg")
+            print(f"Nombre de pokemon: {pokemonDicc[pokeSelect]['nombre']}")
+            print(f"Numero de pokedex: {pokemonDicc[pokeSelect]['id']}")
+            print(f"Tipos: {pokemonDicc[pokeSelect]['tipos']}")
+            print(f"Habilidades: {pokemonDicc[pokeSelect]['habilidades']}")
+            print(f"Altura: {pokemonDicc[pokeSelect]['altura']}m")
+            print(f"Peso: {pokemonDicc[pokeSelect]['peso']}kg")
 
             print("\nMas opciones:")
             print("1. Mostrar estadisticas")
@@ -59,7 +41,8 @@ while(close != True):
 
             if(opc == "1"):
                print("")
-               Estadisticas(pokeJson)
+               #Estadisticas(pokeJson)
+               #print(pokemonDicc[pokeSelect]['estadisticas'])
                print("")
                input("Pulse cualquier tecla para continuar")
                limpiarConsola()

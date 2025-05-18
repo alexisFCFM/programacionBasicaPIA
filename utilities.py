@@ -1,8 +1,10 @@
 import os
 import requests
 import json
+import re
 
 apiUrl = "https://pokeapi.co/api/v2/pokemon/"
+#verificacionNombre = r'^[A-Za-zÁÉÍÓÚáéíóúÑñ]+$'
 
 
 pokemonDicc = {}
@@ -14,11 +16,11 @@ def limpiarConsola():
     else:
         os.system("clear")
 
+
 def Estadisticas(pokemon):
     returnStats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokemon['stats']}
     return returnStats
           
-
 def Habilidades(pokemon):
     returnMov = [ability["ability"]["name"] for ability in pokemon["abilities"]]
     return returnMov            
@@ -27,8 +29,6 @@ def Tipos(pokemon):
     returnType = [types["type"]["name"] for types in pokemon["types"]]
     return returnType
 
-    
-    
 def Movimientos (pokemon):
     movimientos = [movimiento['move']['name'] for movimiento in pokemon['moves'][:4]]
     print(f"{','.join(movimientos).capitalize()}")
@@ -36,14 +36,15 @@ def Movimientos (pokemon):
         
     
 def descargarPokemon(pokeName, pokeJson):
+   
     nombrePokemon = pokeJson['name']
     numeroPokedex = pokeJson['id']
-    tipos = Tipos(pokeJson)
-    habilidades = Habilidades(pokeJson)
+    tipos = [types["type"]["name"] for types in pokeJson["types"]] #Tipos(pokeJson)
+    habilidades = [ability["ability"]["name"] for ability in pokeJson["abilities"]] #Habilidades(pokeJson)
     altura = pokeJson['height']
     peso = pokeJson['weight']
-    stats = Estadisticas(pokeJson)
-    movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves'][:4]]
+    stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokeJson['stats']} #Estadisticas(pokeJson)
+    movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves']]
     
 
     pokemonDicc[pokeName] = {
