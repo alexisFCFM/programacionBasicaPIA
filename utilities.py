@@ -3,6 +3,7 @@ import requests
 import json
 import re
 import numpy
+import statistics
 
 apiUrl = "https://pokeapi.co/api/v2/pokemon/"
 verificacionNombre = r'^[A-Za-z]+$'
@@ -52,6 +53,33 @@ def sacarMedia(pokemon):
     return numpy.mean(tempListaStats)
 
 
+def sacarModa(pokemon):
+    tempHp = int(pokemonDicc[pokemon]['estadisticas']['Hp'])
+    tempAttack = int(pokemonDicc[pokemon]['estadisticas']['Attack'])
+    tempDefense = int(pokemonDicc[pokemon]['estadisticas']['Defense'])
+    tempSpecialAtt = int(pokemonDicc[pokemon]['estadisticas']['Special-attack'])
+    tempSpecialDef = int(pokemonDicc[pokemon]['estadisticas']['Special-defense'])
+    tempSpeed = int(pokemonDicc[pokemon]['estadisticas']['Speed'])
+    
+    tempListaStats = [tempHp, tempAttack, tempDefense, tempSpecialAtt, tempSpecialDef, tempSpeed]
+
+    return statistics.mode(tempListaStats)
+
+
+def sacarMediana(pokemon):
+    tempHp = int(pokemonDicc[pokemon]['estadisticas']['Hp'])
+    tempAttack = int(pokemonDicc[pokemon]['estadisticas']['Attack'])
+    tempDefense = int(pokemonDicc[pokemon]['estadisticas']['Defense'])
+    tempSpecialAtt = int(pokemonDicc[pokemon]['estadisticas']['Special-attack'])
+    tempSpecialDef = int(pokemonDicc[pokemon]['estadisticas']['Special-defense'])
+    tempSpeed = int(pokemonDicc[pokemon]['estadisticas']['Speed'])
+    
+    tempListaStats = [tempHp, tempAttack, tempDefense, tempSpecialAtt, tempSpecialDef, tempSpeed]
+
+    return numpy.median(tempListaStats)
+
+
+    
 
 
 
