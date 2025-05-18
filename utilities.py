@@ -2,6 +2,7 @@ import os
 import requests
 import json
 import re
+import numpy
 
 apiUrl = "https://pokeapi.co/api/v2/pokemon/"
 verificacionNombre = r'^[A-Za-z]+$'
@@ -37,6 +38,24 @@ def Movimientos (pokemon):
     else:
         print("Ingrese un valor valido...")
          
+
+def sacarMedia(pokemon):
+    tempHp = int(pokemonDicc[pokemon]['estadisticas']['Hp'])
+    tempAttack = int(pokemonDicc[pokemon]['estadisticas']['Attack'])
+    tempDefense = int(pokemonDicc[pokemon]['estadisticas']['Defense'])
+    tempSpecialAtt = int(pokemonDicc[pokemon]['estadisticas']['Special-attack'])
+    tempSpecialDef = int(pokemonDicc[pokemon]['estadisticas']['Special-defense'])
+    tempSpeed = int(pokemonDicc[pokemon]['estadisticas']['Speed'])
+    
+    tempListaStats = [tempHp, tempAttack, tempDefense, tempSpecialAtt, tempSpecialDef, tempSpeed]  
+
+    return numpy.mean(tempListaStats)
+
+
+
+
+
+
 def descargarPokemon(pokeName, pokeJson):
    
     if(re.fullmatch(verificacionNombre, pokeJson['name'])):

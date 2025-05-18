@@ -3,3 +3,4 @@
 ### Librerias necesarias:
 * Requests
 * Matplotlib
+* numpy

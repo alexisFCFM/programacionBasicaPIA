@@ -33,7 +33,9 @@ while(close != True):
                print("\nMas opciones:")
                print("1. Mostrar estadisticas")
                print("2. Mostrar movimientos")
-               print("3. Guardar pokemon ya buscadoes en txt")       
+               print(f"3. Sacar promedio de estadisticas de {pokeSelect}")
+
+
                print("4. Cambiar pokemon seleccionado" )
                print("5. Salir")
 
@@ -54,12 +56,9 @@ while(close != True):
                   limpiarConsola()
 
                elif(opc == "3"):
-                  nombreUsuario = input("Seleccione un nombre para su archivo txt: ")
-               
-                  with open(nombreUsuario +'.txt', 'w', encoding='utf-8') as archivo:
-                     json.dump(pokemonDicc, archivo, ensure_ascii=False, indent=4)
-              
-                  print("Archivo exportado")
+                  print("")
+                  print(f"El promedio de las estadisticas de {pokeSelect} es de {sacarMedia(pokeSelect)}")
+                  print("")
                   input("Pulse cualquier tecla para continuar")
                   limpiarConsola()
 
