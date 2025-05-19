@@ -5,6 +5,8 @@ import re
 import numpy
 import statistics
 import matplotlib
+import openpyxl
+import pandas
 
 apiUrl = "https://pokeapi.co/api/v2/pokemon/"
 verificacionNombre = r'^[A-Za-z]+$'
@@ -21,12 +23,21 @@ def limpiarConsola():
 
 
 def Estadisticas(pokemon):
-    print(f"Puntos de vida: {pokemonDicc[pokemon]['estadisticas']['Hp']}")
-    print(f"Puntos de ataque: {pokemonDicc[pokemon]['estadisticas']['Attack']}")
-    print(f"Puntos de defensa: {pokemonDicc[pokemon]['estadisticas']['Defense']}")
-    print(f"Puntos de ataque especial: {pokemonDicc[pokemon]['estadisticas']['Special-attack']}")
-    print(f"Puntos de defensa especial: {pokemonDicc[pokemon]['estadisticas']['Special-defense']}")
-    print(f"Puntos de velocidad: {pokemonDicc[pokemon]['estadisticas']['Speed']}")
+    tempHP = pokemonDicc[pokemon]['estadisticas']['Hp']
+    tempAtt = pokemonDicc[pokemon]['estadisticas']['Attack']
+    tempDef = pokemonDicc[pokemon]['estadisticas']['Defense']
+    tempAttSpe = pokemonDicc[pokemon]['estadisticas']['Special-attack']
+    tempDefSpe = pokemonDicc[pokemon]['estadisticas']['Special-defense']
+    tempSpeed = pokemonDicc[pokemon]['estadisticas']['Speed']
+
+    print(f"Puntos de vida: {tempHP}")
+    print(f"Puntos de ataque: {tempAtt}")
+    print(f"Puntos de defensa: {tempDef}")
+    print(f"Puntos de ataque especial: {tempAttSpe}")
+    print(f"Puntos de defensa especial: {tempDefSpe}")
+    print(f"Puntos de velocidad: {tempSpeed}")
+
+    
           
 def Movimientos (pokemon):
     verificacionNumero = r'^(?!(0+(\.0+)?$))\d+(\.\d+)?$'
@@ -91,6 +102,39 @@ def sacarDerivacionEstandar(pokemon):
     tempListaStats = [tempHp, tempAttack, tempDefense, tempSpecialAtt, tempSpecialDef, tempSpeed]
 
     return statistics.stdev(tempListaStats)
+
+
+def exportarExel(pokemon):
+    diccExel = {}
+  
+    for nombre in pokemonDicc.keys():
+
+        diccExel[nombre] = pokemonDicc[nombre]['estadisticas']
+    
+
+    exportar =  pandas.DataFrame(diccExel)
+    exportar.index = ["Vida","Ataque","Defensa","Ataque especial", "Defensa especial", "Velocidad"]
+
+    nom = input("Ingrese el nombre del archivo de excel que desee: ")
+
+    archivoExcel = pandas.ExcelWriter(nom + ".xlsx", engine='openpyxl')
+    exportar.to_excel(archivoExcel, sheet_name="Hoja1", index=True)
+    archivoExcel._save()
+    print("Archivo exportado")
+
+    
+
+    #datos = pandas.DataFrame({
+    #tempNombre: [1, 2, 3, 4, 5]
+    #})
+
+    #excel_writer = pandas.ExcelWriter("Prueba.xlsx", engine='openpyxl')
+    #datos.to_excel(excel_writer, sheet_name="Hoja1", index=False)
+    #excel_writer._save()
+
+    #print("Archivo exportado")
+    
+
 
 
 def descargarPokemon(pokeName, pokeJson):

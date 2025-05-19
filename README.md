@@ -5,3 +5,4 @@
 * Matplotlib
 * numpy
 * openpyxl
+* pandas
