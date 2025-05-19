@@ -31,13 +31,13 @@ while(close != True):
                print(f"Peso: {pokemonDicc[pokeSelect]['peso']}kg")
 
                print("\nMas opciones:")
-               print("1. Mostrar estadisticas")
-               print("2. Mostrar movimientos")
+               print(f"1. Mostrar estadisticas de {pokeSelect}")
+               print(f"2. Mostrar movimientos de {pokeSelect}")
                print(f"3. Sacar promedio de las estadisticas de {pokeSelect}")
                print(f"4. Sacar mediana de las estadisticas de {pokeSelect}")
                print(f"5. Sacar moda de las estadisticas de {pokeSelect}")
                print(f"6. Sacar la desviación estándar de las estadisticas de {pokeSelect}")
-               print("7. Exportar estadisticas de todos los pokemon registrados")
+               print("7. Exportar todas las estadisticas de todos los pokemon registrados")
 
 
 

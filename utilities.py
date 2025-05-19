@@ -4,7 +4,7 @@ import json
 import re
 import numpy
 import statistics
-import matplotlib
+import matplotlib.pyplot as plt
 import openpyxl
 import pandas
 
@@ -23,19 +23,26 @@ def limpiarConsola():
 
 
 def Estadisticas(pokemon):
-    tempHP = pokemonDicc[pokemon]['estadisticas']['Hp']
-    tempAtt = pokemonDicc[pokemon]['estadisticas']['Attack']
-    tempDef = pokemonDicc[pokemon]['estadisticas']['Defense']
-    tempAttSpe = pokemonDicc[pokemon]['estadisticas']['Special-attack']
-    tempDefSpe = pokemonDicc[pokemon]['estadisticas']['Special-defense']
-    tempSpeed = pokemonDicc[pokemon]['estadisticas']['Speed']
+    tempHP = int(pokemonDicc[pokemon]['estadisticas']['Hp'])
+    tempAtt = int(pokemonDicc[pokemon]['estadisticas']['Attack'])
+    tempDef = int(pokemonDicc[pokemon]['estadisticas']['Defense'])
+    tempAttSpe = int(pokemonDicc[pokemon]['estadisticas']['Special-attack'])
+    tempDefSpe = int(pokemonDicc[pokemon]['estadisticas']['Special-defense'])
+    tempSpeed = int(pokemonDicc[pokemon]['estadisticas']['Speed'])
 
-    print(f"Puntos de vida: {tempHP}")
-    print(f"Puntos de ataque: {tempAtt}")
-    print(f"Puntos de defensa: {tempDef}")
-    print(f"Puntos de ataque especial: {tempAttSpe}")
-    print(f"Puntos de defensa especial: {tempDefSpe}")
-    print(f"Puntos de velocidad: {tempSpeed}")
+
+    fig, ax = plt.subplots()
+
+    nomStats = ['vida', 'ataque', 'defensa', 'ataque especial', 'defensa especial', 'velocidad']
+    numStats = [tempHP, tempAtt, tempDef, tempAttSpe, tempDefSpe, tempSpeed]
+    bar_colors = ['tab:red', 'tab:blue', 'tab:red', 'tab:orange','tab:red', 'tab:blue']
+
+    ax.bar(nomStats, numStats, color=bar_colors)
+
+    ax.set_ylabel('Puntos de estadística')
+    ax.set_title('Estadísticas del personaje')
+
+    plt.show()
 
     
           
@@ -113,7 +120,7 @@ def exportarExel(pokemon):
     
 
     exportar =  pandas.DataFrame(diccExel)
-    exportar.index = ["Vida","Ataque","Defensa","Ataque especial", "Defensa especial", "Velocidad"]
+    exportar.index = ["vida","ataque","defensa","ataque especial", "defensa especial", "velocidad"]
 
     nom = input("Ingrese el nombre del archivo de excel que desee: ")
 
@@ -124,17 +131,6 @@ def exportarExel(pokemon):
 
     
 
-    #datos = pandas.DataFrame({
-    #tempNombre: [1, 2, 3, 4, 5]
-    #})
-
-    #excel_writer = pandas.ExcelWriter("Prueba.xlsx", engine='openpyxl')
-    #datos.to_excel(excel_writer, sheet_name="Hoja1", index=False)
-    #excel_writer._save()
-
-    #print("Archivo exportado")
-    
-
 
 
 def descargarPokemon(pokeName, pokeJson):
@@ -143,11 +139,11 @@ def descargarPokemon(pokeName, pokeJson):
 
         nombrePokemon = pokeJson['name']
         numeroPokedex = pokeJson['id']
-        tipos = [types["type"]["name"] for types in pokeJson["types"]] #Tipos(pokeJson)
-        habilidades = [ability["ability"]["name"] for ability in pokeJson["abilities"]] #Habilidades(pokeJson)
+        tipos = [types["type"]["name"] for types in pokeJson["types"]] 
+        habilidades = [ability["ability"]["name"] for ability in pokeJson["abilities"]] 
         altura = pokeJson['height']
         peso = pokeJson['weight']
-        stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokeJson['stats']} #Estadisticas(pokeJson)
+        stats = {stat['stat']['name'].capitalize(): stat['base_stat'] for stat in pokeJson['stats']} 
         movimientos = [movimiento['move']['name'] for movimiento in pokeJson['moves']]
     
 
