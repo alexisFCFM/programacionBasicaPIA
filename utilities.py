@@ -32,15 +32,12 @@ def Estadisticas(pokemon):
 
 
     fig, ax = plt.subplots()
-
     nomStats = ['vida', 'ataque', 'defensa', 'ataque especial', 'defensa especial', 'velocidad']
     numStats = [tempHP, tempAtt, tempDef, tempAttSpe, tempDefSpe, tempSpeed]
     bar_colors = ['tab:red', 'tab:blue', 'tab:red', 'tab:orange','tab:red', 'tab:blue']
 
     ax.bar(nomStats, numStats, color=bar_colors)
-
-    ax.set_ylabel('Puntos de estadística')
-    ax.set_title('Estadísticas del personaje')
+    ax.set_title(f'Estadisticas de {pokemon}')
 
     plt.show()
 

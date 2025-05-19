@@ -50,8 +50,8 @@ while(close != True):
                if(opc == "1"):
                   print("")
                   Estadisticas(pokeSelect)
-                  print("")
-                  input("Pulse cualquier tecla para continuar")
+                  #print("")
+                  #input("Pulse cualquier tecla para continuar")
                   limpiarConsola()
 
                elif(opc == "2"):
