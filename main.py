@@ -38,20 +38,21 @@ while(close != True):
                print(f"5. Sacar moda de las estadisticas de {pokeSelect}")
                print(f"6. Sacar la desviación estándar de las estadisticas de {pokeSelect}")
                print("7. Exportar todas las estadisticas de todos los pokemon registrados")
+               print("8. Comparacion entre todos los pokemon")
+               print("9. Comparar velocidad y peso entre todos los pokemon")
+               print("10. Comparar tipos entre todos los pokemone")
 
 
 
                print("")
-               print("10. Cambiar pokemon seleccionado" )
-               print("11. Salir")
+               print("20. Cambiar pokemon seleccionado" )
+               print("22. Salir")
 
                opc = input("Ingrese el numero de la opcion que desee consultar: ")
 
                if(opc == "1"):
                   print("")
                   Estadisticas(pokeSelect)
-                  #print("")
-                  #input("Pulse cualquier tecla para continuar")
                   limpiarConsola()
 
                elif(opc == "2"):
@@ -96,12 +97,28 @@ while(close != True):
                   input("Pulse cualquier tecla para continuar")
                   limpiarConsola()
 
+               elif(opc == "8"):
+                  print("")
+                  comparacionPokemon()
+                  limpiarConsola()
+
+               elif(opc == "9"):
+                  print("")
+                  comparacionPesoVelocidad()
+                  limpiarConsola()
 
                elif(opc == "10"):
+                  print("")
+                  comparacionTipos()
+                  limpiarConsola()
+
+
+
+               elif(opc == "20"):
                   limpiarConsola()
                   break
             
-               elif(opc == "11"):
+               elif(opc == "22"):
                   close = True
                
 

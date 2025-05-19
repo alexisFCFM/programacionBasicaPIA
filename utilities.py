@@ -7,10 +7,11 @@ import statistics
 import matplotlib.pyplot as plt
 import openpyxl
 import pandas
+from collections import Counter
 
 apiUrl = "https://pokeapi.co/api/v2/pokemon/"
 verificacionNombre = r'^[A-Za-z]+$'
-
+verificacionNumero = r'^(?!(0+(\.0+)?$))\d+(\.\d+)?$'
 
 pokemonDicc = {}
 
@@ -30,21 +31,25 @@ def Estadisticas(pokemon):
     tempDefSpe = int(pokemonDicc[pokemon]['estadisticas']['Special-defense'])
     tempSpeed = int(pokemonDicc[pokemon]['estadisticas']['Speed'])
 
+    verificaionStats = tempHP+tempAtt+tempDef+tempAttSpe+tempDefSpe+tempSpeed
 
-    fig, ax = plt.subplots()
-    nomStats = ['vida', 'ataque', 'defensa', 'ataque especial', 'defensa especial', 'velocidad']
-    numStats = [tempHP, tempAtt, tempDef, tempAttSpe, tempDefSpe, tempSpeed]
-    bar_colors = ['tab:red', 'tab:blue', 'tab:red', 'tab:orange','tab:red', 'tab:blue']
+    if(re.fullmatch(verificacionNumero, str(verificaionStats))):
+        fig, ax = plt.subplots()
+        nomStats = ['vida', 'ataque', 'defensa', 'ataque especial', 'defensa especial', 'velocidad']
+        numStats = [tempHP, tempAtt, tempDef, tempAttSpe, tempDefSpe, tempSpeed]
+        bar_colors = ['tab:red', 'tab:blue', 'tab:red', 'tab:orange','tab:red', 'tab:blue']
 
-    ax.bar(nomStats, numStats, color=bar_colors)
-    ax.set_title(f'Estadisticas de {pokemon}')
+        ax.bar(nomStats, numStats, color=bar_colors)
+        ax.set_title(f'Estadisticas de {pokemon}')
 
-    plt.show()
+        plt.show()
 
-    
-          
+    else:
+        print("Error en la verificacion de datos")
+
+
 def Movimientos (pokemon):
-    verificacionNumero = r'^(?!(0+(\.0+)?$))\d+(\.\d+)?$'
+    
   
     movMax = input("Ingrese la catidad maxima de movimientos que desea ver: ")
     print()
@@ -113,8 +118,11 @@ def exportarExel(pokemon):
   
     for nombre in pokemonDicc.keys():
 
-        diccExel[nombre] = pokemonDicc[nombre]['estadisticas']
-    
+        if(re.fullmatch(verificacionNombre, nombre)):
+            diccExel[nombre] = pokemonDicc[nombre]['estadisticas']
+        else:
+            print("Se encontraron datos corruptos")
+
 
     exportar =  pandas.DataFrame(diccExel)
     exportar.index = ["vida","ataque","defensa","ataque especial", "defensa especial", "velocidad"]
@@ -125,9 +133,61 @@ def exportarExel(pokemon):
     exportar.to_excel(archivoExcel, sheet_name="Hoja1", index=True)
     archivoExcel._save()
     print("Archivo exportado")
+   
 
+def comparacionPokemon():
+    nomStats = ['Hp', 'Attack', 'Defense', 'Special-attack', 'Special-defense', 'Speed']
     
+    for nombre in pokemonDicc:
+        stats = [int(pokemonDicc[nombre]['estadisticas'][e]) for e in nomStats]
+        plt.plot(nomStats, stats, label=nombre)
+    
+    plt.title('Comparación de estadísticas')
+    plt.xlabel('Estadísticas')
+    plt.ylabel('Valor')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
 
+
+def comparacionPesoVelocidad():
+    pesos = []
+    velocidades = []
+    nombres = []
+
+    for nombre, datos in pokemonDicc.items():
+        verificacion = datos['peso'] + int(datos['estadisticas']['Speed'])
+        
+        if(re.fullmatch(verificacionNumero, str(verificacion))):
+            pesos.append(datos['peso'])
+            velocidades.append(int(datos['estadisticas']['Speed']))
+            nombres.append(nombre)
+        else:
+            print("Error en la verificacion de datos")
+        
+
+    plt.scatter(pesos, velocidades)
+
+    for i, nombre in enumerate(nombres):
+        plt.text(pesos[i], velocidades[i], nombre, fontsize=8)
+
+    plt.title("Relación entre peso y velocidad")
+    plt.xlabel("Peso")
+    plt.ylabel("Velocidad")
+    plt.grid(True)
+    plt.show()
+
+
+def comparacionTipos():
+    todos_tipos = []
+
+    for datos in pokemonDicc.values():
+        todos_tipos.extend(datos['tipos'])
+
+    conteo = Counter(todos_tipos)
+    plt.pie(conteo.values(), labels=conteo.keys(), autopct='%1.1f%%')
+    plt.title("Distribución de tipos de Pokémon")
+    plt.show()
 
 
 def descargarPokemon(pokeName, pokeJson):
