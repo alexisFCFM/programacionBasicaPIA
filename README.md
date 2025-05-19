@@ -4,3 +4,4 @@
 * Requests
 * Matplotlib
 * numpy
+* openpyxl
